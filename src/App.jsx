@@ -2,10 +2,10 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Navbar from './assets/componnents/header/nav'
-import Banner from './assets/componnents/banner/banner'
-import MenuLista from './assets/componnents/menu/menu'
-import Contenedor from './assets/componnents/container/ItemListContainer'
+import Navbar from './componnents/header/nav'
+import Banner from './componnents/banner/banner'
+import MenuLista from './componnents/menu/menu'
+import Contenedor from './componnents/container/ItemListContainer'
 
 function App() {
   const [count, setCount] = useState(0)
