@@ -5,7 +5,7 @@ import './App.css'
 import Navbar from './componnents/header/nav'
 import Banner from './componnents/banner/banner'
 import MenuLista from './componnents/menu/menu'
-import Contenedor from './componnents/container/ItemListContainer'
+import ItemListContainer from './componnents/container/ItemListContainer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,9 +13,11 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Banner />
-      <MenuLista />
-      <Contenedor info={'Ups!!! La página se encuentra en desarrollo, todavía no hay productos cargados'}/>
+      <div className='contenedroGeneral'>
+        <Banner />
+        <MenuLista />
+        <ItemListContainer/>
+      </div>
     </div>
   )
 }

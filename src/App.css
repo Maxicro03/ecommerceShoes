@@ -83,12 +83,15 @@
   transform: scale(1.1);
 }
 
+.contenedroGeneral{
+  position: relative;
+  top: 50px;
+}
+
 .contenedorBanner{
   width: 100%;
   height: 400px;
   background-color: #d0d0d0;
-  position: relative;
-  top: 50px;
 }
 
 .bannerPrincipal{
@@ -100,8 +103,6 @@
 .contenedorMenu{
   width: 100%;
   height: 50px;
-  position: relative;
-  top: 50px;
   background-color: #0046f8;
   display: flex;
   justify-content: center;
@@ -146,4 +147,45 @@
   width: 500px;
   text-align: center;
   font-family: 'Varela Round', sans-serif;
+}
+
+.contenedorCards{
+  display: flex;
+  flex-wrap: wrap;
+  width: 1500px;
+  margin: 10px;
+  margin-bottom: 100px;
+  justify-content: space-evenly;
+}
+
+.card{
+  width: 300px;
+  height: auto;
+  border: 1px solid #000;
+  margin: 10px;
+  transition: all 0.5s ease;
+  border-radius: 5px;
+}
+
+.card:hover{
+  cursor: pointer;
+transform: scale(1.1);
+}
+
+.marca{
+  font-weight: bold;
+
+}
+
+.modelo{
+  font-family: 'Rubik', sans-serif;
+  height: 50px;
+}
+
+.precio{
+  font-weight: bold;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
