@@ -115,6 +115,7 @@
   align-items: center;
   text-decoration: none;
   list-style: none;
+  margin-right: 2px;
 }
 
 .opciones{
@@ -188,4 +189,37 @@ transform: scale(1.1);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.contenedor_talles{
+  width: 400px;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.selector input[type="radio"] {
+  display: none;
+}
+
+.selector{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 20px;
+  padding: 10px 20px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+
+
+.selected {
+  background-color: #808080;
+  color: #fff;
 }
