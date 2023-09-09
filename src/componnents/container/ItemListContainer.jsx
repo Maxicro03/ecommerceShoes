@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { mFetch } from "../../utils/mockFetch"
 import ItemList from "../ItemList/ItemList"
+import { Filter } from "../filter/filter"
 
 const ItemListContainer = () => {
     const [products, setProduct] = useState([])
@@ -17,7 +18,15 @@ const ItemListContainer = () => {
     return(
             <center>
                 <div className="contenedorCards">
-                    {loading ? <h2>Loading ...</h2> : <ItemList products={products} /> }
+                    {loading ? <h2>Loading ...</h2> : 
+                    <Filter products={products}>
+                        {({ filterState}) => (
+                        <>
+                            <ItemList products={products} filterState={filterState} />
+                        </>
+                        )}
+                    </Filter>
+                    }
                 </div>
             </center>
     )

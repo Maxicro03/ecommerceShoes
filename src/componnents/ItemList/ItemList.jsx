@@ -1,18 +1,15 @@
 import Item from "../Item/Item"
-import Filter from "../filter/filter"
 
-const filtradoProducto = ({filterState, filtrarCambios}) =>(
-    <h2>Buscador</h2>
-)
 
-const ItemList = ({products}) => {
+const ItemList = ({products, filterState}) => {
     return(
         <>
-        
-            <Filter>
-                { products.map(products => <Item key={products.id} products={products}/>) }
-                {filtradoProducto}
-            </Filter>
+        {
+            filterState === ''?
+            products.map(products => <Item key={products.id} products={products}/>) 
+            :
+            products.filter(products => products.modelo.toLowerCase().includes(filterState.toLowerCase())).map(products => <Item key={products.id} products={products}/>) 
+        }
         </>  
         )
 }

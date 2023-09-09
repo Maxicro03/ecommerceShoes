@@ -1,15 +1,15 @@
+import { useState } from "react"
 
-const Filter = ({children}) => {
-    const [filterState, setFilterState] = useState("")
+export const Filter = ({children, products}) => {
+    const [filterState, setFilterState] = useState('')
 
     const filtrarCambios = (event) =>{
         setFilterState(event.target.value)
     }
     return(
         <>
-            { children({filterState, filtrarCambios}) }
+            { children({filterState, filtrarCambios, products}) }
         </>
     )
 }
 
-export default Filter
