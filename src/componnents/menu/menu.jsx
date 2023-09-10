@@ -1,13 +1,21 @@
 
-const MenuLista = ({filterState, filtrarCambios}) => {
+const MenuLista = ({setFilterState}) => {
     return(
         <div className="contenedorMenu">
             <ul className="listado">
-                <li className="opciones" value={filterState} onClick={filtrarCambios}>Adidas</li>
-                <li className="opciones" value="Nike">Nike</li>
-                <li className="opciones" value="Puma">Puma</li>
-                <li className="opciones" value="New Balance">New Balance</li>
-            </ul>
+        <li className="opciones" onClick={() => setFilterState('Adidas')}>
+          Adidas
+        </li>
+        <li className="opciones" onClick={() => setFilterState('Nike')}>
+          Nike
+        </li>
+        <li className="opciones" onClick={() => setFilterState('Puma')}>
+          Puma
+        </li>
+        <li className="opciones" onClick={() => setFilterState('New Balance')}>
+          New Balance
+        </li>
+      </ul>
         </div>
     )
 }

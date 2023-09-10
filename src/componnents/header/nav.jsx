@@ -1,10 +1,10 @@
 import Carrito from "../carrito/carrito"
-import { Filter } from "../filter/filter"
 
-const Navbar = () => {
+const Navbar = ({ filterState, setFilterState }) => {
+    const filtrarCambios = (event) => {
+        setFilterState(event.target.value)
+    }
     return(
-        <Filter>
-            {({ filterState, filtrarCambios }) => (
                 <nav className="barraNavegacion">
                     <div className="logoContent">
                         <img src="./src/componnents/images/logo.jpg" alt="logo" className="logo" />
@@ -15,12 +15,10 @@ const Navbar = () => {
                                 <i className="fa-solid fa-magnifying-glass"></i>
                             </p>
                         </div>
-                        <input type="text" value={filterState} onChange={filtrarCambios} placeholder="Buscar..." />
+                        <input type="text" value={filterState} onChange={(e) => filtrarCambios(e)} placeholder="Buscar..." className="buscadorTexto"/>
                     </div>
                     <Carrito />
                 </nav>
-            )}
-        </Filter>
     )
 }
 

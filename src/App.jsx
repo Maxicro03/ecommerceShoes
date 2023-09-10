@@ -9,7 +9,7 @@ import ItemListContainer from './componnents/container/ItemListContainer'
 import ItemCount from './componnents/counter/ItemCount'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [filterState, setFilterState] = useState('');
 
   const onAdd = (cantidad) => {
     console.log(cantidad)
@@ -17,11 +17,11 @@ function App() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar filterState={filterState} setFilterState={setFilterState} />
       <div className='contenedroGeneral'>
         <Banner />
-        <MenuLista />
-        <ItemListContainer/>
+        <MenuLista filterState={filterState} setFilterState={setFilterState}/>
+        <ItemListContainer filterState={filterState} />
         <ItemCount initial={1} stock ={20} onAdd={onAdd}/>
       </div>
     </div>

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import { mFetch } from "../../utils/mockFetch"
 import ItemList from "../ItemList/ItemList"
-import { Filter } from "../filter/filter"
 
-const ItemListContainer = () => {
+const ItemListContainer = ({filterState}) => {
     const [products, setProduct] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -14,22 +13,19 @@ const ItemListContainer = () => {
         .finally(()=> setLoading(false))
     }, [])
 
+
     console.log(products)
-    return(
-            <center>
-                <div className="contenedorCards">
-                    {loading ? <h2>Loading ...</h2> : 
-                    <Filter products={products}>
-                        {({ filterState}) => (
-                        <>
-                            <ItemList products={products} filterState={filterState} />
-                        </>
-                        )}
-                    </Filter>
-                    }
-                </div>
-            </center>
-    )
-}
+    return (
+    <center>
+      <div className="contenedorCards">
+        {loading ? (
+          <h2>Loading ...</h2>
+        ) : (
+            <ItemList products={ filterState ? products.filter((product) => product.modelo.toLowerCase().includes(filterState.toLowerCase())) : products } filterState={filterState} />
+            )}
+      </div>
+    </center>
+  );
+};
 
 export default ItemListContainer
