@@ -21,7 +21,7 @@ const ItemListContainer = ({filterState}) => {
         {loading ? (
           <h2>Loading ...</h2>
         ) : (
-            <ItemList products={ filterState ? products.filter((product) => product.modelo.toLowerCase().includes(filterState.toLowerCase())) : products } filterState={filterState} />
+            <ItemList products={ products } filterState={filterState} />
             )}
       </div>
     </center>

@@ -25,14 +25,10 @@ const products = [
     {id: 24, marca: "New Balance", modelo: "Altas 650 Rojo",  imgPrincipal: "./src/componnents/images/Altas_650_3.jpg", precio: "152",  stock:  { talle_7: 20, talle_7_5: 20, talle_8: 20, talle_8_5: 20, talle_9: 20, talle_9_5: 20, talle_10: 20, talle_10_5: 20, talle_11: 20, talle_11_5: 20, talle_12: 20, talle_12_5: 20}}
 ]
 
-export const mFetch = () => new Promise((res,rej) => {
-    const condition = true
-    if(condition){
+export const mFetch = (pid) => new Promise((res,rej) => {
+    
         setTimeout(()=>{
-            res(products)
+            res(pid ? products.find(products => products.id === pid) : products)
         }, 1000)
-    }
-    else{
-        rej("Sin Productos")
-    }
 })
+
