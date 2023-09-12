@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import Carrito from "../carrito/carrito"
 
 const Navbar = ({ filterState, setFilterState }) => {
@@ -6,9 +7,9 @@ const Navbar = ({ filterState, setFilterState }) => {
     }
     return(
                 <nav className="barraNavegacion">
-                    <div className="logoContent">
-                        <img src="./src/componnents/images/logo.jpg" alt="logo" className="logo" />
-                    </div>
+                    <Link className="logoContent" to='/'>
+                        <img src=".././src/componnents/images/logo.jpg" alt="logo" className="logo" />
+                    </Link>
                     <div className="buscador">
                         <div className="lupa">
                             <p>

@@ -2,8 +2,6 @@ import { useState } from 'react'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 import Navbar from './componnents/header/nav'
-import Banner from './componnents/banner/banner'
-import MenuLista from './componnents/menu/menu'
 import ItemListContainer from './componnents/container/ItemListContainer'
 import ItemDetailContainer from './componnents/detailContainer/ItemDetailContainer'
 
@@ -16,11 +14,9 @@ function App() {
     <Router>
       <Navbar filterState={filterState} setFilterState={setFilterState} />
       <div className='contenedroGeneral'>
-        <Banner />
-        <MenuLista filterState={filterState} setFilterState={setFilterState}/>
         <Routes>
-          <Route path='/' element={<ItemListContainer filterState={filterState} />}/>
-          <Route path='/detalle' element={<ItemDetailContainer />}/> 
+          <Route path='/' element={<ItemListContainer filterState={filterState} setFilterState={setFilterState} />}/>
+          <Route path='/detalle/:pid' element={<ItemDetailContainer />}/> 
         </Routes>
       </div>
     </Router>

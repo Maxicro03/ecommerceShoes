@@ -16,7 +16,7 @@ const Talles = () => {
         }
     return(
             <center> 
-                <h2>Productos</h2>
+                <h2>Talles</h2>
                 <div className="contenedor_talles">
                     <label className="selector" onClick={seleccionado}>
                         <input type="radio" name="talla" value="7"/><span>7</span>
