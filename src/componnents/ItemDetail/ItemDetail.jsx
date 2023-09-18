@@ -19,8 +19,8 @@ const ItemDetail = ({product}) => {
                     </div>
                     <div className="contenedorProductoTalles">
                         <div className="marcaModelo">
-                            <p className="marca">{product.marca}</p>
-                            <p className="modelo">{product.modelo}</p>
+                            <p className="marcaDetail">{product.marca}</p>
+                            <p className="modeloDetail">{product.modelo}</p>
                         </div>
                         <div className="talleCantidad">
                             <div className="talle">
