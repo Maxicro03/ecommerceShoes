@@ -1,15 +1,18 @@
+import { useParams } from "react-router-dom";
 import Item from "../Item/Item"
 
 
 const ItemList = ({products, filterState}) => {
     let filteredProducts;
+    const { cid } = useParams()
+
 
   if (filterState === '') {
     filteredProducts = products;
-  }else if(["Adidas", "Nike", "Puma", "New Balance"].includes(filterState)) {
-    console.log(filteredProducts = products.filter(
+  }else if(["adidas", "nike", "puma", "newbalance"].includes(filterState.toLowerCase())) {
+    filteredProducts = products.filter(
         (product) =>
-          product.marca.toLowerCase().includes(filterState.toLowerCase())
+          product.marca.toLowerCase().includes(filterState.toLowerCase()
     ))
   }else {
     filteredProducts = products.filter(
@@ -17,7 +20,6 @@ const ItemList = ({products, filterState}) => {
         product.modelo.toLowerCase().includes(filterState.toLowerCase())
     );
   }
-  console.log(filterState)
     return(
         <>
         {filteredProducts.map((product) => (

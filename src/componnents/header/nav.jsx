@@ -18,7 +18,9 @@ const Navbar = ({ filterState, setFilterState }) => {
                         </div>
                         <input type="text" value={filterState} onChange={(e) => filtrarCambios(e)} placeholder="Buscar..." className="buscadorTexto"/>
                     </div>
-                    <Carrito />
+                    <Link to='/cart'>
+                        <Carrito />
+                    </Link>
                 </nav>
     )
 }

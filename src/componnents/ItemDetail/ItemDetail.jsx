@@ -19,7 +19,7 @@ const ItemDetail = ({product}) => {
                     </div>
                     <div className="contenedorProductoTalles">
                         <div className="marcaModelo">
-                            <p className="marcaDetail">{product.marca}</p>
+                            <p className="marcaDetail">{product.marca === "newbalance" ? "New Balance" : product.marca ? product.marca.charAt(0).toUpperCase() + product.marca.slice(1).toLowerCase() : ""}</p>
                             <p className="modeloDetail">{product.modelo}</p>
                         </div>
                         <div className="talleCantidad">
