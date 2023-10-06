@@ -1,30 +1,26 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useCartContext } from "../../context/CartContext"
 import { addDoc, collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore"
 import Swal from 'sweetalert2'
-
-import { useCartContext } from "../../context/CartContext"
-
-
-
+import { useState } from "react"
 
 const CartContainer = () =>{
 
-    const {cartList, deleteCart, deleteProductCart, totalPrice} = useCartContext()
-    const [nameOrder, setNameOrder] = useState()
-    const [phoneOrder, setPhoneOrder] = useState()
-    const [emailOrder, setEmailOrder] = useState()
+    const {cartList, deleteCart, deleteProductCart, precioTotal} = useCartContext()
+    const [nombreOrden, setNombreOrden] = useState()
+    const [telefonoOrden, setTelefonoOrden] = useState()
+    const [emailOrden, setEmailOrden] = useState()
 
     const handleAddOrder = async () => {
         const order = {};
-        if(nameOrder != undefined && phoneOrder != undefined && emailOrder != undefined ){
-            order.buyer = { name: nameOrder, phone: phoneOrder, email: emailOrder }
+        if(nombreOrden != undefined && telefonoOrden != undefined && emailOrden != undefined ){
+            order.buyer = { name: nombreOrden, phone: telefonoOrden, email: emailOrden }
             order.items = await Promise.all(
                 cartList.map(async (prod) => {
                     const queryDB = getFirestore()
-                    const getDBProduct = doc(queryDB, "products", prod.id)
+                    const obtenerDBProduct = doc(queryDB, "products", prod.id)
                     const talleToUpdate = `talle_${prod.cambioTalle.replace(".", "_")}`
-                    const productDoc = await getDoc(getDBProduct)
+                    const productDoc = await getDoc(obtenerDBProduct)
                     const productData = productDoc.data()
                     
                     if (prod.cantidad <= productData.stock[talleToUpdate]) {
@@ -46,7 +42,7 @@ const CartContainer = () =>{
                     }
                 })
             )
-            order.total = totalPrice()
+            order.total = precioTotal()
 
             if(order.items.every(item => item !== null)){
                 const queryDB = getFirestore()
@@ -55,21 +51,21 @@ const CartContainer = () =>{
                 .then(resp => console.log(resp))
         
                 for (let i = 0; i < order.items.length; i++) {
-                    const prodcut = order.items[i]
-                    const subtractAmount = prodcut.quantity
-                    const sizeToUpdate = `talle_${prodcut.size.replace(".", "_")}`
-                    const queryUpdateProduct = doc(queryDB, "products",prodcut.id, )
+                    const prodcuto = order.items[i];
+                    const cantidadRestar = prodcuto.quantity
+                    const talleToUpdate = `talle_${prodcuto.size.replace(".", "_")}`
+                    const queryUpdateProduct = doc(queryDB, "products",prodcuto.id, )
             
                     try{
                         const productDoc = await getDoc(queryUpdateProduct)
             
                         const productData = productDoc.data()
-                        const currentStock = productData.stock[sizeToUpdate]
+                        const currentStock = productData.stock[talleToUpdate]
             
-                        if (currentStock !== undefined && currentStock - subtractAmount >= 0) {
-                            const newStock = currentStock - subtractAmount
+                        if (currentStock !== undefined && currentStock - cantidadRestar >= 0) {
+                            const newStock = currentStock - cantidadRestar
                     
-                            const updatedStock = { ...productData.stock, [sizeToUpdate]: newStock }
+                            const updatedStock = { ...productData.stock, [talleToUpdate]: newStock }
                     
                             await updateDoc(queryUpdateProduct, { stock: updatedStock })
                     
@@ -106,7 +102,7 @@ const CartContainer = () =>{
 
     return(
         <div className="contedorCart">
-            {cartList.map(prod => 
+            { cartList.length > 0 ?cartList.map(prod => 
                     <div className="productoCarrtio" key={prod.id}>
                         <img src={prod.imgPrincipal} className="imgCart" alt="" width="100px"/>
                         <div className="modeloMarcaCarrito">
@@ -116,12 +112,12 @@ const CartContainer = () =>{
                         <p className="contenedorDatoCart">Talle<strong>{prod.cambioTalle}</strong></p>
                         <p className="contenedorDatoCart">Cantidad<strong>{prod.cantidad}</strong></p>
                         <p className="contenedorDatoCart precioCart">USD {prod.precio * prod.cantidad}<strong className="tamañoCart">C/u {prod.precio}</strong></p>
-                        <button className="eleiminarProductoCart" onClick={() =>deleteProductCart(prod.id, prod.cambioTalle)}>X</button>
-                    </div>)}
+                        <button className="eleiminarProductoCart" onClick={() =>deleteProductCart(prod.id, prod.cambioTalle, prod.cantidad)}>X</button>
+                    </div>) : ""}
             {cartList.length > 0   ? <div className="contenedorFormulario">
-                <input type="text" placeholder="Nombre..." className="formCarrito" onChange={(e)=>setNameOrder(e.target.value)}/>
-                <input type="number" placeholder="Telefono..." onChange={(e)=>setPhoneOrder(e.target.value)}/>
-                <input type="email" placeholder="Email..." className="formCarrito" onChange={(e)=>setEmailOrder(e.target.value)}/>
+                <input type="text" placeholder="Nombre..." className="formCarrito" onChange={(e)=>setNombreOrden(e.target.value)}/>
+                <input type="number" placeholder="Telefono..." onChange={(e)=>setTelefonoOrden(e.target.value)}/>
+                <input type="email" placeholder="Email..." className="formCarrito" onChange={(e)=>setEmailOrden(e.target.value)}/>
             </div> : ""}
             {cartList.length > 0   ?   <div className="contenedorBtnCart">
                                             <button onClick={deleteCart} className="vaciarCart">Vaciar Carrito</button>

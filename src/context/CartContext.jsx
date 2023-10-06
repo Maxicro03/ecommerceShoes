@@ -11,7 +11,7 @@ export const CartContextProvider = ({ children }) =>{
 
 
 
-    const downloadLocalStorage = () => {
+    const descargarLocalStorage = () => {
         const storedCart = localStorage.getItem("cart")
         if (storedCart && storedCart !== undefined) {
           setCartList(JSON.parse(storedCart))
@@ -21,7 +21,7 @@ export const CartContextProvider = ({ children }) =>{
         }
       }
     
-    const amountCarrito = () =>{
+    const cantidadCarrito = () =>{
         let sumaProductos = 0
         cartList.forEach(element => {
             sumaProductos += element.cantidad 
@@ -29,7 +29,7 @@ export const CartContextProvider = ({ children }) =>{
           return sumaProductos
     }
 
-    const totalPrice = () =>{
+    const precioTotal = () =>{
         let sumaPrecioTotal = 0
         cartList.forEach(element => {
             sumaPrecioTotal += element.precio * element.cantidad
@@ -103,9 +103,9 @@ export const CartContextProvider = ({ children }) =>{
             addProduct,
             deleteCart,
             deleteProductCart,
-            amountCarrito,
-            totalPrice,
-            downloadLocalStorage,
+            cantidadCarrito,
+            precioTotal,
+            descargarLocalStorage,
             isProductInCart
         }}>
             {children}

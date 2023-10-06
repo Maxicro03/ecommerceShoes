@@ -1,13 +1,13 @@
 import { useEffect } from "react"
 import { useCantidad } from "../hooks/useCantidad"
 
-const ItemCount = ({initial, stock, onAdd, sizeChange, cartQuantity}) =>{
-    const {amount, productAdd, productSubstract, resetAmount} = useCantidad(initial, stock, cartQuantity)
+const ItemCount = ({initial, stock, onAdd, cambioTalle, cantidadARestar}) =>{
+    const {cantidad, productAdd, productSubstract, resetCantidad} = useCantidad(initial, stock, cantidadARestar)
 
    
     useEffect(()=>{
-        resetAmount()
-    },[sizeChange])
+        resetCantidad()
+    },[cambioTalle])
 
     return( 
             <>
@@ -22,7 +22,7 @@ const ItemCount = ({initial, stock, onAdd, sizeChange, cartQuantity}) =>{
                         <button onClick={productAdd}>+ 1</button>
                     </div>
                 </div>
-                <button className="bteAgregar" onClick={()=> (onAdd(amount), resetAmount())}>Agregar al carrito</button>
+                <button className="bteAgregar" onClick={()=> (onAdd(cantidad), resetCantidad())}>Agregar al carrito</button>
             </>
         )
 }

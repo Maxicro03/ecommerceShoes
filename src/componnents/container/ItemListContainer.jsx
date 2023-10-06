@@ -3,7 +3,7 @@ import { collection, getDocs, getFirestore, where} from "firebase/firestore"
 import { useParams } from "react-router-dom";
 
 import ItemList from "../ItemList/ItemList"
-import MenuList from "../menu/menu";
+import MenuLista from "../menu/menu";
 import Banner from "../banner/banner";
 
 const Loading = () =>{
@@ -24,8 +24,8 @@ const ItemListContainer = ({filterState, setFilterState}) => {
       const queryCollection = collection(db, "products")
       getDocs(queryCollection)
       .then(resp=> { 
-        const individualProducts = resp.docs.map(prod =>({id: prod.id, ...prod.data()}))
-        setProduct(["adidas", "nike", "puma", "newbalance"].includes(cid) ? individualProducts.filter(prod => cid === prod.marca) : individualProducts)})
+        const productsIndividual = resp.docs.map(prod =>({id: prod.id, ...prod.data()}))
+        setProduct(["adidas", "nike", "puma", "newbalance"].includes(cid) ? productsIndividual.filter(prod => cid === prod.marca) : productsIndividual)})
       .then(resp => console.log(resp))
       .catch(err => console.log(err))
       .finally(()=> setLoading(false))
@@ -33,7 +33,7 @@ const ItemListContainer = ({filterState, setFilterState}) => {
     return (
       <>
         <Banner />
-        <MenuList filterState={filterState} setFilterState={setFilterState}/>
+        <MenuLista filterState={filterState} setFilterState={setFilterState}/>
         <center>
           <div className="contenedorCards">
             {loading ? (

@@ -1,13 +1,13 @@
 import { useEffect } from "react"
 import { useCartContext } from "../../context/CartContext"
 
-const Cart = () => {
+const Carrito = () => {
 
-    const {cartList, amountCarrito, downloadLocalStorage} = useCartContext()
+    const {cartList, cantidadCarrito, descargarLocalStorage} = useCartContext()
 
     useEffect(() => {
         
-        downloadLocalStorage()
+        descargarLocalStorage()
       }, [])
 
     return(
@@ -15,11 +15,11 @@ const Cart = () => {
             <div className="carrito">
                     <i class="fa-solid fa-cart-shopping carro"></i>
                     {cartList.length > 0 ? <div className="cantidadCarrito">
-                        <p className="textoCantidadCarrito">{amountCarrito()}</p>
+                        <p className="textoCantidadCarrito">{cantidadCarrito()}</p>
                     </div> :""}
             </div>
         </>
     )
 }
 
-export default Cart
+export default Carrito

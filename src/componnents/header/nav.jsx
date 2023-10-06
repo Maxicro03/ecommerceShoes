@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
-import Cart from "../carrito/carrito"
+import Carrito from "../carrito/carrito"
 
 const Navbar = ({ setFilterState }) => {
     
 
-    const filterChanges = (event) => {
+    const filtrarCambios = (event) => {
         setFilterState(event.target.value)
     }
 
@@ -24,10 +24,10 @@ const Navbar = ({ setFilterState }) => {
                                 <i className="fa-solid fa-magnifying-glass"></i>
                             </p>
                         </div>
-                        <input type="text"  onChange={(e) => filterChanges(e)} placeholder="Buscar..." className="buscadorTexto"/>
+                        <input type="text"  onChange={(e) => filtrarCambios(e)} placeholder="Buscar..." className="buscadorTexto"/>
                     </div>
                     <Link to='/cart'>
-                        <Cart />
+                        <Carrito />
                     </Link>
                 </nav>
     )

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { doc, getDoc, getFirestore } from "firebase/firestore"
 
 
-const Size = ({stockSelect, setStockSelect, setSizeChange}) => {
+const Talles = ({stockSelect, setStockSelect, setCambioTalle}) => {
     const [productDetail, setProductDetail] = useState({})
 
     const {pid} = useParams()
@@ -31,7 +31,7 @@ const Size = ({stockSelect, setStockSelect, setSizeChange}) => {
         const labels = document.querySelectorAll('.selector')
         labels.forEach((label) => label.classList.remove('selected'))
         event.target.closest('.selector').classList.add('selected')
-        setSizeChange(event.target.value)
+        setCambioTalle(event.target.value)
 
 
 
@@ -92,4 +92,4 @@ const Size = ({stockSelect, setStockSelect, setSizeChange}) => {
     )
 }
 
-export default Size
+export default Talles

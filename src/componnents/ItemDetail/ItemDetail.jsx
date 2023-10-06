@@ -1,36 +1,36 @@
 import { useEffect, useState } from "react"
 
 import ItemCount from "../counter/ItemCount"
-import Size from "../talles/talles"
+import Talles from "../talles/talles"
 import { useCartContext } from "../../context/CartContext"
 import { useParams } from "react-router-dom"
 
 const ItemDetail = ({product}) => {
     const [stockSelect, setStockSelect] = useState({})
-    const [sizeChange, setSizeChange] = useState()
-    const [cartQuantity, setCartQuantity] = useState()
+    const [cambioTalle, setCambioTalle] = useState()
+    const [cantidadCarrito, setCantidadCarrito] = useState()
 
     const {pid} = useParams()
     
     const {addProduct, isProductInCart} = useCartContext()
 
     useEffect(()=>{
-        setCartQuantity(isProductInCart(sizeChange, pid))
-    },[sizeChange])
+        setCantidadCarrito(isProductInCart(cambioTalle, pid))
+    },[cambioTalle])
 
    
-    const onAdd = (Amount) => {
+    const onAdd = (cantidad) => {
 
-        if(cartQuantity !== undefined){
-            if(Amount <stockSelect - cartQuantity.cantidad){
-                addProduct({...product, Amount, sizeChange})
+        if(cantidadCarrito !== undefined){
+            if(cantidad <stockSelect - cantidadCarrito.cantidad){
+                addProduct({...product, cantidad, cambioTalle})
             }
             else{
                 console.log("estas intentando agregar mas productos de los que hay");
             }
         }
         else{
-            addProduct({...product, Amount, sizeChange})
+            addProduct({...product, cantidad, cambioTalle})
           }    
       }
 
@@ -53,7 +53,7 @@ const ItemDetail = ({product}) => {
                         </div>
                         <div className="talleCantidad">
                             <div className="talle">
-                                <Size stockSelect={stockSelect} setStockSelect={setStockSelect} setSizeChange={setSizeChange}/>
+                                <Talles stockSelect={stockSelect} setStockSelect={setStockSelect} setCambioTalle={setCambioTalle} CambioTalle={cambioTalle} onAdd={onAdd}/>
                             </div>
                             <div className="contenedorPrecio">
                                 <p >USD <span className="precioNumero">{product.precio}</span></p>
@@ -61,7 +61,7 @@ const ItemDetail = ({product}) => {
                         </div>
                         <div className="cantidad">
                         {stockSelect && Object.keys(stockSelect).length > 0 && stockSelect > 0 ? (
-                            <ItemCount initial={1} stock={stockSelect} onAdd={onAdd} sizeChange={sizeChange} cartQuantity={cartQuantity}/>
+                            <ItemCount initial={1} stock={stockSelect} onAdd={onAdd} cambioTalle={cambioTalle} cantidadARestar={cantidadCarrito} pid={pid} setCantidadCarrito={setCantidadCarrito}/>
                         ) : ( stockSelect < 1 ?
                             <div className="sinStock">
                                 <p>Sin Stock</p>
