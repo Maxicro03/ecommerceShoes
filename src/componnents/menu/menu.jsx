@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 
-const MenuList = ({setFilterState}) => {
+const MenuLista = ({setFilterState}) => {
     return(
         <div className="contenedorMenu">
             <ul className="listado">
@@ -29,4 +29,4 @@ const MenuList = ({setFilterState}) => {
     )
 }
 
-export default MenuList
+export default MenuLista

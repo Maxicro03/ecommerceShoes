@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { collection, getDocs, getFirestore, where} from "firebase/firestore"
 import { useParams } from "react-router-dom";
+import { collection, getDocs, getFirestore} from "firebase/firestore"
+
 
 import ItemList from "../ItemList/ItemList"
 import MenuLista from "../menu/menu";

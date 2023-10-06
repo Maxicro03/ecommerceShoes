@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom"
-import { useCartContext } from "../../context/CartContext"
+import { useState } from "react"
+
 import { addDoc, collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore"
 import Swal from 'sweetalert2'
-import { useState } from "react"
+
+import { useCartContext } from "../../context/CartContext"
+import ItemCart from "../itemCart/ItemCart"
+import CartForm from "../cartForm/CartForm"
 
 const CartContainer = () =>{
 
-    const {cartList, deleteCart, deleteProductCart, precioTotal} = useCartContext()
+    const {cartList, deleteCart, precioTotal} = useCartContext()
     const [nombreOrden, setNombreOrden] = useState()
     const [telefonoOrden, setTelefonoOrden] = useState()
     const [emailOrden, setEmailOrden] = useState()
@@ -100,25 +104,15 @@ const CartContainer = () =>{
 
     }
 
+
     return(
         <div className="contedorCart">
-            { cartList.length > 0 ?cartList.map(prod => 
-                    <div className="productoCarrtio" key={prod.id}>
-                        <img src={prod.imgPrincipal} className="imgCart" alt="" width="100px"/>
-                        <div className="modeloMarcaCarrito">
-                            <p className="fuenteCart">{prod.marca.charAt(0).toUpperCase() + prod.marca.slice(1).toLowerCase()}</p>
-                            <p className="modeloCart fuenteCart">{prod.modelo}</p>
-                        </div>
-                        <p className="contenedorDatoCart">Talle<strong>{prod.cambioTalle}</strong></p>
-                        <p className="contenedorDatoCart">Cantidad<strong>{prod.cantidad}</strong></p>
-                        <p className="contenedorDatoCart precioCart">USD {prod.precio * prod.cantidad}<strong className="tamañoCart">C/u {prod.precio}</strong></p>
-                        <button className="eleiminarProductoCart" onClick={() =>deleteProductCart(prod.id, prod.cambioTalle, prod.cantidad)}>X</button>
-                    </div>) : ""}
-            {cartList.length > 0   ? <div className="contenedorFormulario">
-                <input type="text" placeholder="Nombre..." className="formCarrito" onChange={(e)=>setNombreOrden(e.target.value)}/>
-                <input type="number" placeholder="Telefono..." onChange={(e)=>setTelefonoOrden(e.target.value)}/>
-                <input type="email" placeholder="Email..." className="formCarrito" onChange={(e)=>setEmailOrden(e.target.value)}/>
-            </div> : ""}
+            <ItemCart /> 
+            {cartList.length > 0 ? (
+            <CartForm setNombreOrden={setNombreOrden} setTelefonoOrden={setTelefonoOrden} setEmailOrden={setEmailOrden} />
+            ) : (
+                ""
+            )}
             {cartList.length > 0   ?   <div className="contenedorBtnCart">
                                             <button onClick={deleteCart} className="vaciarCart">Vaciar Carrito</button>
                                             <button className="finalizarCart" onClick={handleAddOrder}>Finalizar Compra</button>

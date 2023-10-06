@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 
 import ItemCount from "../counter/ItemCount"
 import Talles from "../talles/talles"
 import { useCartContext } from "../../context/CartContext"
-import { useParams } from "react-router-dom"
+
 
 const ItemDetail = ({product}) => {
     const [stockSelect, setStockSelect] = useState({})
@@ -53,7 +54,7 @@ const ItemDetail = ({product}) => {
                         </div>
                         <div className="talleCantidad">
                             <div className="talle">
-                                <Talles stockSelect={stockSelect} setStockSelect={setStockSelect} setCambioTalle={setCambioTalle} CambioTalle={cambioTalle} onAdd={onAdd}/>
+                                <Talles stockSelect={stockSelect} setStockSelect={setStockSelect} setCambioTalle={setCambioTalle}/>
                             </div>
                             <div className="contenedorPrecio">
                                 <p >USD <span className="precioNumero">{product.precio}</span></p>
@@ -61,7 +62,7 @@ const ItemDetail = ({product}) => {
                         </div>
                         <div className="cantidad">
                         {stockSelect && Object.keys(stockSelect).length > 0 && stockSelect > 0 ? (
-                            <ItemCount initial={1} stock={stockSelect} onAdd={onAdd} cambioTalle={cambioTalle} cantidadARestar={cantidadCarrito} pid={pid} setCantidadCarrito={setCantidadCarrito}/>
+                            <ItemCount initial={1} stock={stockSelect} onAdd={onAdd} cambioTalle={cambioTalle} cantidadARestar={cantidadCarrito}/>
                         ) : ( stockSelect < 1 ?
                             <div className="sinStock">
                                 <p>Sin Stock</p>

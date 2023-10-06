@@ -76,10 +76,15 @@ export const CartContextProvider = ({ children }) =>{
     }
 
     const deleteProductCart = (id, talle) => {
-        const updatedCartList = cartList.filter((product) => {
-            return product.id !== id || product.cambioTalle !== talle;
-        })
+        let productoMarcado ;
+        cartList.map((product)=>{
+                product.id === id &&
+                product.cambioTalle === talle ? productoMarcado = product : null
 
+        })
+        const updatedCartList = cartList.filter((prod) => {
+            return (prod !== productoMarcado)
+        })
         setCartList(updatedCartList)
         localStorage.setItem("cart", JSON.stringify(updatedCartList))
     } 
