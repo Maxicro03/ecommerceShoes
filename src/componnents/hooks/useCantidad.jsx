@@ -4,7 +4,7 @@ export const useCantidad = (min, max, cantidadCarrito)=>{
     const [cantidad, setCantidad] = useState(min)
 
     const resetCantidad = () =>{
-        setCantidad(1)
+        setCantidad(min)
     }
 
     const productAdd = () =>{

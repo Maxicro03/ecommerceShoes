@@ -16,7 +16,7 @@ const Navbar = ({ setFilterState }) => {
     return(
                 <nav className="barraNavegacion">
                     <Link className="logoContent" to='/' >
-                        <img src=".././src/componnents/images/logo.jpg" alt="logo" className="logo" onClick={resetFilter}/>
+                        <img src="https://i.postimg.cc/QMJVqxqT/logo.jpg" alt="logo" className="logo" onClick={resetFilter}/>
                     </Link>
                     <div className="buscador">
                         <div className="lupa">

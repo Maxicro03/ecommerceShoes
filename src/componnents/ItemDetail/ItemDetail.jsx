@@ -24,6 +24,7 @@ const ItemDetail = ({product}) => {
 
         if(cantidadCarrito !== undefined){
             if(cantidad <stockSelect - cantidadCarrito.cantidad){
+                console.log(cantidad);
                 addProduct({...product, cantidad, cambioTalle})
             }
             else{
@@ -31,6 +32,7 @@ const ItemDetail = ({product}) => {
             }
         }
         else{
+            console.log(cantidad);
             addProduct({...product, cantidad, cambioTalle})
           }    
       }

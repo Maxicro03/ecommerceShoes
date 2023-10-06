@@ -26,6 +26,7 @@ export const CartContextProvider = ({ children }) =>{
         cartList.forEach(element => {
             sumaProductos += element.cantidad 
           })
+          console.log(cartList)
           return sumaProductos
     }
 
@@ -60,7 +61,7 @@ export const CartContextProvider = ({ children }) =>{
 
                   if (productIndex !== -1) {
                     const updatedCartList = [...cartList]
-                    if((updatedCartList[productIndex].cantidad += newProduct.cantidad) <= 20){
+                    if((updatedCartList[productIndex].cantidad + newProduct.cantidad) <= 20){
                         updatedCartList[productIndex].cantidad += newProduct.cantidad
                     }
                     else{
