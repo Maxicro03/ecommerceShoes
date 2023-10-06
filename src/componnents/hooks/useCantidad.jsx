@@ -1,19 +1,30 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export const useCantidad = (min, max)=>{
-    const [cantidad, setCantidad] = useState(min)
+export const useCantidad = (min, max, cartQuantity)=>{
+    const [amount, setAmount] = useState(min)
 
+    const resetAmount = () =>{
+        setAmount(1)
+    }
 
     const productAdd = () =>{
-        if(cantidad < max){
-            setCantidad(cantidad + 1)
+        if(cartQuantity !== undefined){
+            if(amount < (max - cartQuantity.cantidad) ){
+                setAmount(amount + 1)
+            }
         }
+        else{
+            if(amount < (max) ){
+                setAmount(amount + 1)
+            }
+        }
+
     }
 
     const productSubstract = () =>{
-        if(cantidad > min){
-            setCantidad(cantidad - 1)
+        if(amount > min){
+            setAmount(amount - 1)
         }
     }
-    return {cantidad, productAdd, productSubstract}
+    return {amount, productAdd, productSubstract, resetAmount, max}
 }
